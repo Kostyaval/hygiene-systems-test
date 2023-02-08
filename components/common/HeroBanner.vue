@@ -9,44 +9,54 @@
     :class="[imageStyleClass]"
     class="article"
   >
-    <div
-      class="wrapper"
-    >
-      <div  class="content">
-        <h2
-          v-if="title"
-          class="title heading-1"
-          :class="[ titleClass]"
-          :style="[
-            { color: titleColor },
-            { backgroundImage: titleColorGradient },
-          ]"
-        >
-          {{ title }}
-        </h2>
-        <h3
-          v-if="subtitle"
-          class="subtitle-1 subtitle"
-          :style="{ color: subtitleColor }"
-        >
-          {{ subtitle }}
-        </h3>
-        <slot></slot>
+    <div class="wrapper">
+      <div class="logo-wrapper">
+        <nuxt-picture
+          quality="80"
+          class="logo"
+          :class="logoClass"
+          :src="logo"
+          loading="lazy"
+        />
       </div>
-      <div
-        :class="[imagePositionClass]"
-        class="image-wrapper"
-      >
-
+      <div class="content">
+        <div class="content-text">
+          <h2
+            v-if="title"
+            class="title heading-1"
+            :class="[titleClass]"
+            :style="[
+              { color: titleColor },
+              { backgroundImage: titleColorGradient },
+            ]"
+          >
+            {{ title }}
+          </h2>
+          <h3
+            v-if="subtitle"
+            class="subtitle-1 subtitle"
+            :style="{ color: subtitleColor }"
+          >
+            {{ subtitle }}
+          </h3>
+          <slot></slot>
+          <div class="section-made">
+            <svg-icon name="default/flag" class="icon-flag" />
+            <div class="section-made-text">
+              Trusted by 5,000 + businesses NZ wide
+            </div>
+          </div>
+        </div>
+      </div>
+      <div :class="[imagePositionClass]" class="image-wrapper">
         <nuxt-picture
           quality="80"
           class="image"
-          :class="[ imageTransformClass]"
+          :class="[imageTransformClass]"
           :src="image"
           :alt="alt"
           loading="lazy"
         />
-
       </div>
     </div>
   </article>
@@ -54,12 +64,12 @@
 
 <script>
 export default {
-  name: "SectionImage",
+  name: 'HeroBanner',
   components: {},
   props: {
     image: {
       type: String,
-      default: '/images/home/what_is_exerfly.jpg',
+      default: '',
     },
     title: {
       type: String,
@@ -135,8 +145,17 @@ export default {
     },
     backgroundMobile: {
       type: Boolean,
-      default: true
+      default: true,
     },
+    logo: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      logoClass: 'transparent-logo',
+    }
   },
   computed: {
     imagePositionClass() {
@@ -145,7 +164,13 @@ export default {
     imageStyleClass() {
       return this.imageStyle.toLowerCase()
     },
-  }
+  },
+
+  mounted() {
+      this.logoClass = 'logo-animation'
+
+
+  },
 }
 </script>
 
@@ -153,13 +178,14 @@ export default {
 .article
   min-height: 912px
   //max-height: 824pxF
-  padding: 100px 0
+  padding: 80px 0 100px
   display: flex
   align-items: center
   background-position: left center
   background-repeat: no-repeat
   .wrapper
     width: 100%
+    position: relative
     max-width: 1440px
     margin-left: auto
     margin-right: auto
@@ -168,7 +194,7 @@ export default {
     display: grid
     grid-template-columns: 1fr 1fr
     grid-auto-flow: dense
-    grid-column-gap: 70px
+    grid-column-gap: 10px
     align-items: center
   .image-wrapper
     position: relative
@@ -180,12 +206,40 @@ export default {
     max-width: 725px
     height: auto
   .content
-    +text-base
-    max-width: 504px
+    display: flex
+    justify-content: center
     height: 100%
+  .content-text
     position: relative
+    max-width: 504px
+    +text-base
+    padding-top: 100px
   .subtitle
     padding-top: 50px
+  .logo-wrapper
+    position: absolute
+    right: 29%
+  .logo::v-deep img
+    max-width: 635px
+  .transparent-logo::v-deep img
+    opacity: 0
+  .logo-animation
+    transition: 8s opacity-logo 10s
+  .section-made
+    display: grid
+    grid-auto-flow: column
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 267px
+    height: 64px
+  .section-made-text
+    color: var(--neutral-400)
+    padding-left: 24px
+    line-height: 32px
+  .icon-flag
+    width: 64px
+    height: 64px
 // Modifications
 .article
   .wrapper.cover
@@ -212,5 +266,4 @@ export default {
     text-fill-color: transparent
     -webkit-background-clip: text
     -webkit-text-fill-color: transparent
-
 </style>
