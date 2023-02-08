@@ -1,0 +1,62 @@
+.swiper-container
+  .swiper-pagination-bullets.swiper-pagination-bullets-dynamic
+    left: auto
+    transform: none
+  .pagination-ready-swiper
+    position: relative
+    width: 200px !important
+    margin: 0 auto
+    bottom: 0 !important
+    padding-top: 50px
+    text-align: center
+    .swiper-pagination-bullet
+      width: 10px
+      height: 10px
+      margin: 0 5px
+      background-color: var(--corporate-200)
+      opacity: 1
+      &-active
+        background-color: var(--corporate-500)
+    &--accent
+      .swiper-pagination-bullet
+        width: 15px
+        height: 15px
+        margin: 0 15px !important
+        background-color: transparent
+        border: 2px solid var(--corporate-500)
+        opacity: 1
+        cursor: pointer
+        &-active
+          background-color: var(--corporate-500)
+  .pagination-swiper-new
+    position: relative
+    width: 200px !important
+    margin: 0 auto
+    bottom: 0 !important
+    padding-top: 50px
+    text-align: center
+    .swiper-pagination-bullet
+      width: 24px
+      height: 1px
+      margin: 0 3px
+      border-radius: 0
+      background-color: var(--corporate-200)
+      opacity: 1
+      &-active
+        background-color: var(--corporate-500)
+        height: 3px
+
+
+  .navigation-wrapper
+    position: absolute
+    margin: auto
+    left: 0
+    right: 0
+    bottom: 0
+    max-width: 585px
+    width: 100%
+    display: flex
+    justify-content: space-between
+    z-index: -1
+  .button-next-ready-swiper
+    transform: rotate(180deg)
